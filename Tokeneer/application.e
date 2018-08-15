@@ -15,7 +15,8 @@ create
 feature {NONE} -- Initialization
 
 	make
-			-- Run application.
+		local
+			tokeneer: ID_STATION
 		do
 			--| Add your code here
 			print ("Hello Eiffel World!%N")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <system xmlns="http://www.eiffel.com/developers/xml/configuration-1-18-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-18-0 http://www.eiffel.com/developers/xml/configuration-1-18-0.xsd" name="tokeneer" uuid="DF81480D-D6FF-4269-9B68-B3611DE11ECC">
 	<target name="tokeneer">
-		<root class="APPLICATION" feature="make"/>
+		<root all_classes="true"/>
 		<file_rule>
 			<exclude>/CVS$</exclude>
 			<exclude>/EIFGENs$</exclude>
@@ -19,9 +19,19 @@
 		</capability>
 		<precompile name="base_pre" location="$ISE_PRECOMP\base-safe.ecf"/>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="time" location="$ISE_LIBRARY\library\time\time.ecf"/>
 		<cluster name="tokeneer" location=".\">
-			<cluster name="core" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\core\"/>
-			<cluster name="real_world_entities" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\real_world_entities\"/>
+			<cluster name="core" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\core\">
+				<cluster name="constants" location="e:\users\mansu\workspaces\eiffelstudio\tokeneeroneiffel\tokeneer\core\constants\"/>
+				<cluster name="types" location="e:\users\mansu\workspaces\eiffelstudio\tokeneeroneiffel\tokeneer\core\types\"/>
+			</cluster>
+			<cluster name="real_world_entities" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\real_world_entities\">
+				<cluster name="controlled" location="e:\users\mansu\workspaces\eiffelstudio\tokeneeroneiffel\tokeneer\real_world_entities\controlled\"/>
+				<cluster name="monitored" location="e:\users\mansu\workspaces\eiffelstudio\tokeneeroneiffel\tokeneer\real_world_entities\monitored\"/>
+			</cluster>
+			<cluster name="certificates" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\certificates\"/>
+			<cluster name="users" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\users\"/>
+			<cluster name="tokens" location="E:\Users\mansu\Workspaces\EiffelStudio\TokeneerOnEiffel\Tokeneer\tokens\"/>
 		</cluster>
 	</target>
 </system>
