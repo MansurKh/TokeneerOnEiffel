@@ -15,11 +15,16 @@ create
 feature {NONE} -- Initialization
 
 	make
+		local
+			time: TIME
 		do
+			-- TODO: set time out period from config
+			create time.make_by_seconds (30)
+
 			create types.make
 				-- Controlled world entities
-			create latch
-			create alarm
+			create latch.make (time)
+			create alarm.make (time)
 			create display
 			create screen.make (types)
 				-- Monitored world entities
@@ -61,5 +66,9 @@ feature -- Monitored entities
 feature -- Access
 
 	types: TYPES
+
+invariant
+
+
 
 end

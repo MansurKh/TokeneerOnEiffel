@@ -19,9 +19,7 @@ feature {NONE} -- Initialisation
 		do
 			create id.make
 			create clearance.make (id)
-			create presence.make (id)
 			create privilege.make (id)
-			create door_states.make (id)
 			create latch_states.make (id)
 			create alarm_states.make (id)
 			create display_messages.make (id)
@@ -35,20 +33,10 @@ feature {ATTRIBUTE_CERTIFICATE} -- Clearance
 	clearance: CLEARANCE
 			-- Ordered classification on documents, areas and people
 
-feature -- Presence
-
-	presence: PRESENCE
-			-- Possible states of physical entity which can be `present' or `absent'
-
 feature {ATTRIBUTE_CERTIFICATE} -- Privileges
 
 	privilege: PRIVILEGE
 			-- Possible roles held by the Token user
-
-feature {DOOR} -- Door states
-
-	door_states: DOOR_STATES
-			-- Possible states of the door which can be `open' or `closed'
 
 feature {LATCH} -- Latch states
 
