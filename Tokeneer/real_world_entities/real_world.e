@@ -16,20 +16,20 @@ feature {NONE} -- Initialization
 
 	make
 		local
-			time: TIME
+			time: DATE_TIME
 		do
 			-- TODO: set time out period from config
-			create time.make_by_seconds (30)
+			create time.make_now
 
 			create types.make
 				-- Controlled world entities
 			create latch.make (time)
 			create alarm.make (time)
-			create display
+			create display.make (types)
 			create screen.make (types)
 				-- Monitored world entities
 			create now
-			create door
+			create door.make
 			create finger
 			create user_token
 			create admin_token

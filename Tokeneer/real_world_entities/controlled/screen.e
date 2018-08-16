@@ -18,7 +18,7 @@ feature
 		do
 			messages := types.screen_messages
 			stats := messages.clear
-			msg := messages.clear
+			message := messages.clear
 			config := messages.clear
 		end
 
@@ -34,14 +34,14 @@ feature -- Setters
 			stats = val
 		end
 
-	set_msg (val: INTEGER)
+	set_message (val: INTEGER)
 			-- `set_msg' sets the messge in the screen
 		require
 			messages.possible_values.has (val)
 		do
-			msg := val
+			message := val
 		ensure
-			msg = val
+			message = val
 		end
 
 	set_config (val: INTEGER)
@@ -58,7 +58,7 @@ feature
 
 	stats: INTEGER assign set_stats
 
-	msg: INTEGER assign set_msg
+	message: INTEGER assign set_message
 
 	config: INTEGER assign set_config
 
@@ -66,7 +66,7 @@ feature
 
 invariant
 	valid_stats: messages.possible_values.has (stats)
-	valid_msg: messages.possible_values.has (msg)
+	valid_msg: messages.possible_values.has (message)
 	valid_config: messages.possible_values.has (config)
 
 end

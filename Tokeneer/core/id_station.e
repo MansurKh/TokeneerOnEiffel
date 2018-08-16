@@ -8,37 +8,67 @@ note
 class
 	ID_STATION
 
+inherit
+
+	REAL_WORLD
+		rename
+			make as create_real_world_entities
+		end
+	INTERNAL_STATE
+		rename
+			make as initialize_internal_state
+		end
+
+	KEYSTORE
+
 create
-	make
+	start_nonenrolled_station,
+	start_enrolled_station
 
 feature {NONE} -- Initialization
 
-	make
-			-- Creation procedure for Tlkeneer ID Station
+	start_nonenrolled_station
+			-- Start of nonenrolled ID station according to Z-schema "StartNonEnrolledStation"
 		do
---			create certification_authority.make (issuer: ISSUER, begining, ending: DATE_TIME)
 			create issuer_certificates.make
 
-			create types.make
-
-
+			create_real_world_entities
+			initialize_internal_state (types)
 		ensure
---			id_station_is_issuer: issuer_certificates.has (id_station_certificate)
+			own_name_not_set: not attached ownName
+			request_enrolment_data: screen.message = types.screen_messages.insert_enrolment_data
+			blank_diplay: display.message = types.display_messages.blank
+			not_enrolled: enclave_status = types.enclave_statuses.not_enrolled
+			quiescent: status = types.statuses.quiescent
+			unenrolled_start_logged: True -- TODO
+		end
+
+	start_enrolled_station
+			-- Start of enrolled ID station according to Z-schema "StartEnrolledStation"
+		do
+			create issuer_certificates.make
+
+			create_real_world_entities
+			initialize_internal_state (types)
+		ensure
+			own_name_is_set: attached ownName
+			admin_welcomed: screen.message = types.screen_messages.welcome_admin
+			blank_diplay: display.message = types.display_messages.welcome
+			enclave_quiescent: enclave_status = types.enclave_statuses.enclave_quiescent
+			quiescent: status = types.statuses.quiescent
+			enrolled_start_logged: True -- TODO
 		end
 
 feature
 
---	id_station_certificate: ID_CERTIFICATE
+		--	id_station_certificate: ID_CERTIFICATE
 
---	certification_authorities: LINKED_LIST [ID_CERTIFICATE]
+		--	certification_authorities: LINKED_LIST [ID_CERTIFICATE]
 
 	issuer_certificates: LINKED_LIST [ID_CERTIFICATE]
 
-	types: TYPES
-
 invariant
---	id_station_is_issuer: issuer_certificates.has (id_station_certificate)
-		-- Z-schema: Enrol
-
+	-- id_station_is_issuer: issuer_certificates.has (id_station_certificate)
+	-- Z-schema: Enrol
 
 end

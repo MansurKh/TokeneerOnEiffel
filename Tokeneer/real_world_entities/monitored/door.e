@@ -9,13 +9,32 @@ note
 class
 	DOOR
 
+create
+	make
+
 feature {NONE} -- Initialization
 
 	make
 		do
-			is_open := FALSE
+			is_open := False
 		ensure
-			door_is_closed: not is_open
+			door_is_closed: not is_open -- Z-schema: InitDoorLatchAlarm
+		end
+
+feature {APPLICATION} -- Access
+			-- Door is not controlled by the system
+	open
+		do
+			is_open := True
+		ensure
+			is_open
+		end
+
+	close
+		do
+			is_open := False
+		ensure
+			not is_open
 		end
 
 feature -- Access

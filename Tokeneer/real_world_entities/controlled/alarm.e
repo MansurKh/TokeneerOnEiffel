@@ -12,8 +12,41 @@ class
 inherit
 
 	TIMED
+		redefine
+			make
+		end
 
 create
 	make
+
+feature {NONE} -- Initialization
+
+	make (init_time: DATE_TIME)
+		do
+			Precursor (init_time)
+			alarming := False
+		ensure then
+			not alarming
+		end
+
+feature -- Actions
+
+	turn_on
+		do
+			alarming := True
+		ensure
+			alarming
+		end
+
+	turn_off
+		do
+			alarming := False
+		ensure
+			not alarming
+		end
+
+feature -- Access
+
+	alarming: BOOLEAN
 
 end
