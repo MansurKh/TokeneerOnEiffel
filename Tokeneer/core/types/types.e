@@ -20,8 +20,6 @@ feature {NONE} -- Initialisation
 			create id.make
 			create clearance.make (id)
 			create privilege.make (id)
-			create latch_states.make (id)
-			create alarm_states.make (id)
 			create display_messages.make (id)
 			create screen_messages.make (id)
 			create statuses.make (id)
@@ -39,16 +37,6 @@ feature {ATTRIBUTE_CERTIFICATE} -- Privileges
 
 	privilege: PRIVILEGE
 			-- Possible roles held by the Token user
-
-feature {LATCH} -- Latch states
-
-	latch_states: LATCH_STATES
-			-- Possible states of the latch which can be `unlocked' or `locked'
-
-feature {ALARM} -- Alarm states
-
-	alarm_states: ALARM_STATES
-			-- Possible states of the alarm which can be `silent' or `alarming'
 
 feature -- Display messages
 

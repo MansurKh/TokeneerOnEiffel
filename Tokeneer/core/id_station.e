@@ -14,16 +14,22 @@ inherit
 		rename
 			make as create_real_world_entities
 		end
+
 	INTERNAL_STATE
 		rename
 			make as initialize_internal_state
 		end
 
-	KEYSTORE
+	KEYING_AND_CERTIFICATION
+		rename
+			make as initialize,
+			make_enroled as initialize_and_enrol
+		end
+
+	OPERATIONS
 
 create
-	start_nonenrolled_station,
-	start_enrolled_station
+	start_nonenrolled_station, start_enrolled_station
 
 feature {NONE} -- Initialization
 
@@ -31,9 +37,9 @@ feature {NONE} -- Initialization
 			-- Start of nonenrolled ID station according to Z-schema "StartNonEnrolledStation"
 		do
 			create issuer_certificates.make
-
 			create_real_world_entities
 			initialize_internal_state (types)
+			initialize
 		ensure
 			own_name_not_set: not attached ownName
 			request_enrolment_data: screen.message = types.screen_messages.insert_enrolment_data
@@ -47,9 +53,9 @@ feature {NONE} -- Initialization
 			-- Start of enrolled ID station according to Z-schema "StartEnrolledStation"
 		do
 			create issuer_certificates.make
-
 			create_real_world_entities
 			initialize_internal_state (types)
+			initialize_and_enrol
 		ensure
 			own_name_is_set: attached ownName
 			admin_welcomed: screen.message = types.screen_messages.welcome_admin
@@ -60,12 +66,6 @@ feature {NONE} -- Initialization
 		end
 
 feature
-
-		--	id_station_certificate: ID_CERTIFICATE
-
-		--	certification_authorities: LINKED_LIST [ID_CERTIFICATE]
-
-	issuer_certificates: LINKED_LIST [ID_CERTIFICATE]
 
 invariant
 	-- id_station_is_issuer: issuer_certificates.has (id_station_certificate)

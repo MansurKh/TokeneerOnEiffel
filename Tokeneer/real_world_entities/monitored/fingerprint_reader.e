@@ -12,5 +12,24 @@ class
 inherit
 
 	READER
+		rename
+			is_data_present as is_finger_present,
+			data as current_fingerprint,
+			read_the_data as read_fingerprint
+		redefine
+			current_fingerprint
+		end
+
+feature -- Command
+
+	read_fingerprint
+		do
+		end
+
+feature -- Access
+
+	current_fingerprint: detachable FINGERPRINT
+
+invariant
 
 end

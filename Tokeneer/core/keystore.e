@@ -9,7 +9,5 @@ note
 class
 	KEYSTORE
 
-feature
-	--issuerKey:
-	ownName: detachable ISSUER
+
 end

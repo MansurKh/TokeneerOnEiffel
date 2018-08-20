@@ -1,12 +1,12 @@
 note
-	description: "Summary description for {TOKEN_TRY}."
+	description: "Summary description for {KEYBOARD_INPUTS}."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
-	page: "15"
+	page: "16"
 	Section: "2.7.1"
 
 class
-	TOKEN_TRY
+	DATA_STATES
 
 inherit
 
@@ -17,20 +17,20 @@ create
 
 feature -- Values
 
-	no_token: INTEGER
-			-- No token inserted
+	no_data: INTEGER
+			-- No data
 		once
 			Result := id.new_id
 		end
 
-	bad_token: INTEGER
-			-- All posible error codes that occure trying to capture token data
+	bad_data: INTEGER
+			-- Invalid data
 		once
 			Result := id.new_id
 		end
 
-	good_token: INTEGER
-			-- Valid token
+	good_data: INTEGER
+			-- Valid data to perfor an administrator operation
 		once
 			Result := id.new_id
 		end
@@ -38,16 +38,16 @@ feature -- Values
 feature -- Query
 
 	possible_values: SET [INTEGER]
-			-- Possible states of token
+			-- Possible inputs that may be supplied by an administratior
 		once
 			create {LINKED_SET [INTEGER]} Result.make
-			Result.extend (no_token)
-			Result.extend (bad_token)
-			Result.extend (good_token)
+			Result.extend (no_data)
+			Result.extend (bad_data)
+			Result.extend (good_data)
 		ensure then
-			Result.has (no_token)
-			Result.has (bad_token)
-			Result.has (good_token)
+			Result.has (no_data)
+			Result.has (bad_data)
+			Result.has (good_data)
 		end
 
 end

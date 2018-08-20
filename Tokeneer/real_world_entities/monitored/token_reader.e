@@ -12,5 +12,22 @@ class
 inherit
 
 	READER
+		rename
+			is_data_present as is_token_present,
+			data as current_token,
+			read_the_data as read_the_token
+		redefine
+			current_token
+		end
+
+feature
+
+	read_the_token
+		do
+		end
+
+feature -- Access
+
+	current_token: detachable TOKEN
 
 end

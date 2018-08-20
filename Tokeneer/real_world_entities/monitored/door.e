@@ -21,8 +21,9 @@ feature {NONE} -- Initialization
 			door_is_closed: not is_open -- Z-schema: InitDoorLatchAlarm
 		end
 
-feature {APPLICATION} -- Access
-			-- Door is not controlled by the system
+feature {TESTS} -- Actions
+	-- Door is not controlled by the system
+
 	open
 		do
 			is_open := True
