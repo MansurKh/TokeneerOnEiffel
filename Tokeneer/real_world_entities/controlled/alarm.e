@@ -12,19 +12,22 @@ class
 inherit
 
 	TIMED
-		redefine
-			make
+		rename
+			make as set_up_timer
 		end
+
+	LOGGED
 
 create
 	make
 
 feature {NONE} -- Initialization
 
-	make (init_time: DATE_TIME)
+	make (init_time: DATE_TIME; logger_: LOGGER)
 		do
-			Precursor (init_time)
-			alarming := False
+			set_up_timer (init_time)
+			set_up_logger (logger_)
+			turn_off
 		ensure then
 			not alarming
 		end
@@ -34,6 +37,7 @@ feature -- Actions
 	turn_on
 		do
 			alarming := True
+			logger.add_log ("Alarming")
 		ensure
 			alarming
 		end
@@ -41,6 +45,7 @@ feature -- Actions
 	turn_off
 		do
 			alarming := False
+			logger.add_log ("Alarm is silenced")
 		ensure
 			not alarming
 		end
@@ -48,5 +53,6 @@ feature -- Actions
 feature -- Access
 
 	alarming: BOOLEAN
+			-- actuator for the alarm bell
 
 end

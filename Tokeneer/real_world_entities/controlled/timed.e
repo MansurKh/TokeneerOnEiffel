@@ -1,5 +1,5 @@
 note
-	description: "{TIMED} is ancestor of classes equipped with timeout feature to limit the time of being in some certain state"
+	description: "{TIMED} is a class equipped with timeout feature to limit the time of being in some certain state"
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "16"

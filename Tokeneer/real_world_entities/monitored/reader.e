@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {READER}."
+	description: "{READER} ."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "16"
@@ -9,34 +9,55 @@ note
 deferred class
 	READER
 
+inherit
+
+	LOGGED
+
 feature {NONE} -- Initialization
 
-	make (types: TYPES)
+	make (types: TYPES; logger_: LOGGER)
 		do
+			logger := logger_
 			is_data_present := False
 				-- initially there is no data (token, finger, usb drive etc.) in reader
+		ensure
+			not is_data_present
 		end
 
-feature {TESTES} -- Actions
+feature {TESTS} -- Actions
 
-	provide_bad_fingerprint
+	provide_bad_data
 		do
 		end
 
-	provide_good_fingerprint
+	provide_good_good
 		do
 		end
 
 feature -- Command
 
 	read_the_data
+		require
+			is_data_present
 		deferred
+		ensure
+			attached data
+		end
+
+	data: detachable DATA
+		deferred
+		ensure
+			not is_data_present implies (recent_data = old recent_data and Result = recent_data)
 		end
 
 feature -- State
 
 	is_data_present: BOOLEAN
+			-- Sensor to detect the presence of data/data-carrier
 
-	data: detachable DATA
+feature {NONE} -- Implementation
+
+	recent_data: detachable DATA
+			-- The data that has been provided recently
 
 end

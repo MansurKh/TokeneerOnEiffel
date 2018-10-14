@@ -12,19 +12,22 @@ class
 inherit
 
 	TIMED
-		redefine
-			make
+		rename
+			make as set_up_timer
 		end
+
+	LOGGED
 
 create
 	make
 
 feature {NONE} -- Initialization
 
-	make (init_time: DATE_TIME)
+	make (init_time: DATE_TIME; logger_: LOGGER)
 		do
-			Precursor (init_time)
-			is_locked := True
+			set_up_timer (init_time)
+			set_up_logger (logger_)
+			lock
 		ensure then
 			door_is_closed: is_locked
 		end
@@ -34,6 +37,7 @@ feature -- Actions
 	lock
 		do
 			is_locked := True
+			logger.add_log("Door latched")
 		ensure
 			is_locked
 		end
@@ -41,6 +45,7 @@ feature -- Actions
 	unlock
 		do
 			is_locked := False
+			logger.add_log("Door unlatched")
 		ensure
 			not is_locked
 		end

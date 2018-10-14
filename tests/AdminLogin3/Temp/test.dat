@@ -1,0 +1,25 @@
+-- AdminLogin3 test
+--
+print AdminLogin3 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Admin Card inserted
+tokenReader.insertCard('INTREAD', 'p07')
+
+print 3. Check for screen message "REMOVE TOKEN".
+hold
+
+print Test Complete.
+
+
+
+

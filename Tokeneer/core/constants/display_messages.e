@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {DISPLAY_MESSAGES}."
+	description: "{DISPLAY_MESSAGES} describe possible messages on the display that resides outside the enclave."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "15"
@@ -24,6 +24,7 @@ feature {NONE} -- Initialization
 	make (id_generator: ID_GENERATOR)
 		do
 			precursor (id_generator)
+			elem_count := 8 -- There are 8 different messages to be diplayed
 			create messages_to_display.make (elem_count)
 			messages_to_display.extend (["SYSTEM NOT OPERATIONAL", ""], blank)
 			messages_to_display.extend (["WELCOME TO TIS", "ENTER TOKEN"], welcome)
@@ -91,7 +92,11 @@ feature -- Query
 			-- All possible messages that might appear on the display
 		once
 			create Result.make
-				--			Result := messages_to_display.current_keys
+			across
+				messages_to_display.current_keys as keys
+			loop
+				Result.extend (keys.item)
+			end
 		ensure then
 			Result.has (blank)
 			Result.has (welcome)
@@ -103,7 +108,7 @@ feature -- Query
 			Result.has (door_unlocked)
 		end
 
-	get_display_messages (state: INTEGER): detachable TUPLE [STRING, STRING]
+	get_display_messages (state: INTEGER): detachable TUPLE [top:STRING; bottom:STRING]
 			-- display specific messages on top and bottom lines of the diplay appropriate for the `state'
 		require
 			possible_values.has (state)
@@ -113,7 +118,7 @@ feature -- Query
 
 feature {NONE} -- Implementation
 
-	messages_to_display: HASH_TABLE [TUPLE [STRING, STRING], INTEGER]
+	messages_to_display: HASH_TABLE [TUPLE [top:STRING; bottom:STRING], INTEGER]
 			-- Top and bottom line messages which corresponds to a certain display state
 
 end

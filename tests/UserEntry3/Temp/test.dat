@@ -1,0 +1,36 @@
+-- UserEntry3 test
+--
+print UserEntry3 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('INTREAD', {'cState': 'absent', 'cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Card inserted
+tokenReader.insertCard('EXTREAD', 'p02')
+print 3. Wait for "REMOVE TOKEN AND ENTER" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 4. Card removed
+pause 5
+
+door.open()
+
+print 5. Door opened too long
+print 6. Wait for Door Alarm raised
+hold
+
+door.close()
+print 7. Check for Door Alarm cleared
+pause 10
+
+print Test Complete.
+
+

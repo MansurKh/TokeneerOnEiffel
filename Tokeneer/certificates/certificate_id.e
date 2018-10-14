@@ -14,7 +14,7 @@ create
 
 feature {NONE}
 
-	make (number: INTEGER; an_issuer: ISSUER)
+	make (number: INTEGER; an_issuer: USER)
 		do
 			serial_number := number
 			issuer := an_issuer
@@ -25,7 +25,7 @@ feature {NONE}
 
 feature
 
-	issuer: ISSUER
+	issuer: USER
 
 	serial_number: INTEGER
 

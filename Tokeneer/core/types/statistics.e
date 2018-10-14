@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {STATISTICS}."
+	description: "{STATISTICS} are data updated as actions that are being monitored for the statistics occur."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "21"
@@ -28,6 +28,40 @@ feature
 		end
 
 feature
+
+	add_entry
+		do
+			entry_count := entry_count + 1
+		ensure
+			entry_count = old entry_count + 1
+				-- Z-schema: AddSuccessfulEntryToStats
+		end
+
+	add_failed_entry
+		do
+			failed_entry_count := failed_entry_count + 1
+		ensure
+			failed_entry_count = old failed_entry_count + 1
+				-- Z-schema: AddFailedEntryToStats
+		end
+
+	add_successful_bio_check
+		do
+			successful_bio_check_count := successful_bio_check_count + 1
+		ensure
+			successful_bio_check_count = old successful_bio_check_count + 1
+				-- Z-schema: AddSuccessfulBioCheckToStats
+		end
+
+	add_failed_bio_check
+		do
+			failed_bio_check_count := failed_bio_check_count + 1
+		ensure
+			failed_bio_check_count = old failed_bio_check_count + 1
+				-- Z-schema: AddFailedBioCheckToStats
+		end
+
+feature -- Access
 
 	entry_count: INTEGER
 

@@ -1,8 +1,10 @@
 note
-	description: "Summary description for {STATUSES}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "{ENCLAVE_STATUSES} describes purly internal records of the progress through all activities performed within the enclave."
+	author: "Mansur Khazeev"
+	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
+	page: "24"
+	Z_schema: "Audit"
+	Section: "3.7"
 
 class
 	ENCLAVE_STATUSES

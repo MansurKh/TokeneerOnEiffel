@@ -1,0 +1,22 @@
+-- Enrol3 test
+--
+print Enrol3 Test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('INTREAD', {'cState': 'absent', 'cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Generate Enrolment data from enrolsource.dat and
+print    copy file Temp/enrol.dat to floppy and leave floppy in drive.
+print 2. Start TIS application.
+hold
+
+print 3. Check for screen message "VALIDATING ENROLMENT DATA PLEASE WAIT".
+print 4. Check for screen message "WELCOME TO TIS".
+hold
+
+print 5. Remove floppy.
+hold
+
+print Test Complete.

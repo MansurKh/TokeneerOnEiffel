@@ -1,5 +1,8 @@
 note
-	description: "{ID_GENERATOR} is used in all decendents of class {BASIC_TYPES} to assign a unique integer number to arributes of those classes (to use those attibutes as kind of Enum)"
+	description: "[
+		{ID_GENERATOR} is used in all decendents of class {BASIC_TYPES} to assign a unique integer number 
+		to arributes of those classes (to use those attibutes as kind of Enum)
+	]"
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "16"

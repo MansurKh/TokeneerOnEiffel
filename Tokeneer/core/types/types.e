@@ -1,5 +1,5 @@
 note
-	description: "Class contains basic types of the system"
+	description: "{TYPES} contains basic types used in the system"
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "8"
@@ -24,16 +24,17 @@ feature {NONE} -- Initialisation
 			create screen_messages.make (id)
 			create statuses.make (id)
 			create enclave_statuses.make (id)
+			create operations.make (id)
 		ensure
 			id.is_active
 		end
 
-feature {ATTRIBUTE_CERTIFICATE} -- Clearance
+feature {ATTRIBUTE_CERTIFICATE, CONFIGURATION} -- Clearance
 
 	clearance: CLEARANCE
 			-- Ordered classification on documents, areas and people
 
-feature {ATTRIBUTE_CERTIFICATE} -- Privileges
+feature {ATTRIBUTE_CERTIFICATE, USER} -- Privileges
 
 	privilege: PRIVILEGE
 			-- Possible roles held by the Token user
@@ -58,12 +59,14 @@ feature -- Enclave statuses
 	enclave_statuses: ENCLAVE_STATUSES
 			-- Possible statuses throughout all activities performed within the enclave
 
+feature -- Administrative operations
+
+	operations: OPERATIONS
+			-- Set of supported administrative operations
+
 feature {NONE} -- Implementation
 
 	id: ID_GENERATOR
-			-- generates new identifier whenever `new_id' is called
-
-invariant
-	id /= Void
+			-- Generates new identifier whenever `new_id' is called
 
 end

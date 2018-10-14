@@ -20,10 +20,14 @@ inherit
 			current_fingerprint
 		end
 
+create
+	make
+
 feature -- Command
 
 	read_fingerprint
 		do
+			create current_fingerprint
 		end
 
 feature -- Access

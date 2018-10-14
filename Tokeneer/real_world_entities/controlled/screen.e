@@ -9,64 +9,47 @@ note
 class
 	SCREEN
 
+inherit
+
+	LOGGED
+
 create
 	make
 
 feature
 
-	make (types: TYPES)
+	make (types: TYPES; logger_: LOGGER)
 		do
 			messages := types.screen_messages
-			stats := messages.clear
-			message := messages.clear
-			config := messages.clear
+			set_up_logger (logger_)
+			display(messages.insert_enrolment_data)
+		ensure
+			messages = types.screen_messages
+			state = messages.insert_enrolment_data
 		end
 
 feature -- Setters
 
-	set_stats (val: INTEGER)
-			-- `set_stats' sets the statistics message in the screen
+	display (new_state: INTEGER)
+			-- Set the state of the screen to `new_state' and output corresponding message
 		require
-			messages.possible_values.has (val)
+			messages.possible_values.has (new_state)
 		do
-			stats := val
+			if state /= new_state then
+				state := new_state
+				logger.add_log ("Screen message was set to: '" + messages.get_screen_message (state) +"' " )
+			end
 		ensure
-			stats = val
-		end
-
-	set_message (val: INTEGER)
-			-- `set_msg' sets the messge in the screen
-		require
-			messages.possible_values.has (val)
-		do
-			message := val
-		ensure
-			message = val
-		end
-
-	set_config (val: INTEGER)
-			-- `set_config' sets the configuration message in the screen
-		require
-			messages.possible_values.has (val)
-		do
-			config := val
-		ensure
-			config = val
+			state = new_state
 		end
 
 feature
 
-	stats: INTEGER assign set_stats
-
-	message: INTEGER assign set_message
-
-	config: INTEGER assign set_config
+	state: INTEGER assign display
 
 	messages: SCREEN_MESSAGES
 
 invariant
-	valid_stats: messages.possible_values.has (stats)
-	valid_msg: messages.possible_values.has (message)
-	valid_config: messages.possible_values.has (config)
+	valid_stats: messages.possible_values.has (state)
 
 end

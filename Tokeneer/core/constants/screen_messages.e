@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {SCREEN_MESSAGES}."
+	description: "{SCREEN_MESSAGES} describe possible messages on the screen within the enclave."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
-	page: "15"
+	page: "15-17"
 	Section: "2.7.1"
 	Table: "2.1"
 
@@ -24,6 +24,7 @@ feature {NONE} -- Initialization
 	make (id_generator: ID_GENERATOR)
 		do
 			precursor (id_generator)
+			elem_count := 15 -- There are 15 different messages to be diplayed
 			create messages_to_display.make (elem_count)
 			messages_to_display.extend ("", clear)
 			messages_to_display.extend ("WELCOME TO TIS", welcome_admin)
@@ -40,6 +41,8 @@ feature {NONE} -- Initialization
 			messages_to_display.extend ("INVALID ENROLMENT DATA", enrolment_failed)
 			messages_to_display.extend ("INSERT BLANK USB DRIVE", insert_blank_usb_drive)
 			messages_to_display.extend ("INSERT CONFIGURATION DATA USB DRIVE", insert_config_data)
+			messages_to_display.extend ("STATISTICS", show_statistics)
+			messages_to_display.extend ("CONFIGURATION DATA", show_configuration)
 		end
 
 feature -- Display states
@@ -134,13 +137,29 @@ feature -- Display states
 			Result := id.new_id
 		end
 
+	show_statistics: INTEGER
+			-- displaying statistics
+		once
+			Result := id.new_id
+		end
+
+	show_configuration: INTEGER
+			-- displaying configuration data
+		once
+			Result := id.new_id
+		end
+
 feature -- Query
 
 	possible_values: LINKED_SET [INTEGER]
 			-- All possible messages on the screen
 		once
 			create Result.make
---			Result := messages_to_display.current_keys
+			across
+				messages_to_display.current_keys as keys
+			loop
+				Result.extend (keys.item)
+			end
 		ensure then
 			Result.has (clear)
 			Result.has (welcome_admin)
@@ -157,14 +176,20 @@ feature -- Query
 			Result.has (enrolment_failed)
 			Result.has (insert_blank_usb_drive)
 			Result.has (insert_config_data)
+			Result.has (show_statistics)
+			Result.has (show_configuration)
 		end
 
-	get_display_message (state: INTEGER): detachable STRING
-			-- display specific message on the TIS screen within the enclave
+	get_screen_message (state: INTEGER): STRING
+			-- get specific message to display on the TIS screen within the enclave
 		require
 			possible_values.has (state)
 		do
-			Result := messages_to_display.at (state)
+			if attached messages_to_display.at (state) as message then
+				Result := message
+			else
+				create Result.make_empty
+			end
 		end
 
 feature {NONE} -- Implementation

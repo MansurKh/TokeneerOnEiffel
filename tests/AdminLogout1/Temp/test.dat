@@ -1,0 +1,57 @@
+-- AdminLogout1 test
+--
+print AdminLogout1 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. add card p07 to SPRE database.
+hold
+
+print 2. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 3. User Card inserted.
+tokenReader.insertCard('EXTREAD', 'p07')
+print 4. Wait for "INSERT FINGER" request.
+hold
+
+bioDevice.supplyImage( {'imageTemplate': 'User07fp', 'FAR':'0','FRR':0})
+print 5. Wait for "REMOVE TOKEN AND ENTER" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 6. Card removed.
+
+pause 5
+print 7. Check for display message "ENTER ENCLAVE".
+door.open()
+
+pause 5
+
+door.close()
+print 8. Check for display message "WELCOME TO TIS / ENTER TOKEN".
+hold
+
+print 9. Admin Card inserted.
+tokenReader.insertCard('INTREAD', 'p07')
+print 10. Check for screen message "ENTER REQUIRED OPERATION".
+hold
+
+print 11. Wait for approx 5 mins and check for screen message "REMOVE TOKEN". 
+hold
+
+tokenReader.removeCard('INTREAD')
+print 12. Check for screen message "WELCOME TO TIS".
+hold
+
+
+print Test Complete.
+
+
+
+

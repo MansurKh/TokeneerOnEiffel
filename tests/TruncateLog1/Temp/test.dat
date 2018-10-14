@@ -1,0 +1,31 @@
+-- TruncateLog1 test
+--
+print TruncateLog1 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Replace the TIS/Log with Temp/Log.
+hold
+
+print 2. Start TIS application.
+hold
+
+print 3. The next action will cause the Audit Log to be truncated.
+hold
+print 4. User token inserted.
+tokenReader.insertCard('EXTREAD', 'p04')
+pause 2
+
+print 5. Wait for "REMOVE TOKEN" request.
+hold
+tokenReader.removeCard('EXTREAD')
+
+print 6. Wait for "WELCOME TO TIS / ENTER TOKEN" message.
+hold
+
+print Test Complete.
+
+

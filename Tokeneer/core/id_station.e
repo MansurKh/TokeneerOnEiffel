@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {ID_STATION}."
+	description: "{ID_STATION} is the main class of the system. In manages all the entities and processes on a very abstracted manner"
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "26"
@@ -12,21 +12,14 @@ inherit
 
 	REAL_WORLD
 		rename
-			make as create_real_world_entities
-		end
-
-	INTERNAL_STATE
-		rename
-			make as initialize_internal_state
+			make as initialize_real_world
 		end
 
 	KEYING_AND_CERTIFICATION
 		rename
-			make as initialize,
-			make_enroled as initialize_and_enrol
+			make as initialize_cert,
+			make_enrolled as initialize_enrolled_cert
 		end
-
-	OPERATIONS
 
 create
 	start_nonenrolled_station, start_enrolled_station
@@ -36,36 +29,37 @@ feature {NONE} -- Initialization
 	start_nonenrolled_station
 			-- Start of nonenrolled ID station according to Z-schema "StartNonEnrolledStation"
 		do
-			create issuer_certificates.make
-			create_real_world_entities
-			initialize_internal_state (types)
-			initialize
+			initialize_real_world
+
+			--	TODO: Rework the certification
+--			initialize_cert(types, clock)
+
 		ensure
-			own_name_not_set: not attached ownName
-			request_enrolment_data: screen.message = types.screen_messages.insert_enrolment_data
-			blank_diplay: display.message = types.display_messages.blank
-			not_enrolled: enclave_status = types.enclave_statuses.not_enrolled
-			quiescent: status = types.statuses.quiescent
-			unenrolled_start_logged: True -- TODO
+			not attached own_name
+			screen.state = types.screen_messages.insert_enrolment_data
+			display.state = types.display_messages.blank
+			enclave_status = types.enclave_statuses.not_enrolled
+			status = types.statuses.quiescent
+--			log_unenrolled_start:
 		end
 
 	start_enrolled_station
 			-- Start of enrolled ID station according to Z-schema "StartEnrolledStation"
 		do
-			create issuer_certificates.make
-			create_real_world_entities
-			initialize_internal_state (types)
-			initialize_and_enrol
-		ensure
-			own_name_is_set: attached ownName
-			admin_welcomed: screen.message = types.screen_messages.welcome_admin
-			blank_diplay: display.message = types.display_messages.welcome
-			enclave_quiescent: enclave_status = types.enclave_statuses.enclave_quiescent
-			quiescent: status = types.statuses.quiescent
-			enrolled_start_logged: True -- TODO
-		end
+			initialize_real_world
 
-feature
+			--	TODO: Rework the certification
+--			initialize_enrolled_cert(types, clock)
+
+			--	TODO: Enroll
+		ensure
+			attached own_name
+			screen.state = types.screen_messages.welcome_admin
+			display.state = types.display_messages.welcome
+			enclave_status = types.enclave_statuses.enclave_quiescent
+			status = types.statuses.quiescent
+--			log_enrolled_start:
+		end
 
 invariant
 	-- id_station_is_issuer: issuer_certificates.has (id_station_certificate)

@@ -1,0 +1,27 @@
+-- UserEntry4 test
+--
+print UserEntry4 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Add card p03 to SPRE database.
+hold
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Card inserted
+tokenReader.insertCard('EXTREAD', 'p03')
+print 4. Wait for "ENTRY DENIED / REMOVE TOKEN" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 5. Card removed
+pause 10
+
+
+print Test Complete.

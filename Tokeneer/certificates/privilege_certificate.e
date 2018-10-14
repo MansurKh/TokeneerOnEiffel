@@ -19,10 +19,10 @@ create
 
 feature {NONE} -- Initialization
 
-	make (issuer: ISSUER; begining, ending: DATE_TIME)
+	make (issuer: ISSUER; time_period: TIME_PERIOD)
 		do
 			create id.make (1, issuer)
-			create validity_period.make (begining, ending)
+			create validity_period.set_as (time_period)
 		end
 
 feature -- Attributes

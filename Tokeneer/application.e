@@ -1,7 +1,6 @@
 note
 	description: "Tokeneer application root class"
-	date: "$Date$"
-	revision: "$Revision$"
+	author: "Mansur Khazeev"
 
 class
 	APPLICATION
@@ -18,8 +17,10 @@ feature {NONE} -- Initialization
 		local
 			tokeneer: ID_STATION
 		do
-			--| Add your code here
-			print ("Hello Eiffel World!%N")
+			print ("Creating nonenrlolled:%N")
+			create tokeneer.start_nonenrolled_station
+			print ("%NCreating enrlolled:%N")
+			create tokeneer.start_enrolled_station
 		end
 
 end

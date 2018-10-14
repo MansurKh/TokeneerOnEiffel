@@ -1,0 +1,33 @@
+-- UserEntry6 test
+--
+print UserEntry6 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Add card p05 to SPRE database.
+hold
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Card inserted
+tokenReader.insertCard('EXTREAD', 'p05')
+print 3. Wait for "ENTRY DENIED / REMOVE TOKEN" request.
+hold
+
+print 4. Type "override" at console.
+hold
+print 5. Check for display message "ENTER ENCLAVE".
+hold
+tokenReader.removeCard('EXTREAD')
+print 6. Card removed
+pause 10
+print 7. Check for display message "WELCOME TO TIS / ENTER TOKEN".
+
+pause 10
+
+print Test Complete.

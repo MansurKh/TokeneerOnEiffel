@@ -1,0 +1,47 @@
+-- UserEntry9 test
+--
+print UserEntry9 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Admin Card inserted
+tokenReader.insertCard('INTREAD', 'p02')
+pause 8
+
+print 3. User Card inserted
+tokenReader.insertCard('EXTREAD', 'p05')
+print 4. Wait for "REMOVE TOKEN AND ENTER" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 5. Card removed
+
+pause 5
+print 6. Check for display message "ENTER ENCLAVE".
+
+door.open()
+
+pause 5
+
+door.close()
+print 7. Check for display message "WELCOME TO TIS / ENTER TOKEN".
+hold
+
+tokenReader.removeCard('INTREAD')
+print 8. Admin Card removed
+print 9. Check for sceen message "WELCOME TO TIS".
+hold
+
+print Test Complete.
+
+
+
+

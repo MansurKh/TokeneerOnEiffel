@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {CLEARANCE}."
+	description: "{CLEARANCE} describes ordered classifications on document, areas, and people."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "8"

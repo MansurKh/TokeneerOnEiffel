@@ -1,0 +1,14 @@
+with "win32ada";
+with "..\common.gpr";
+
+project MakeCard is
+
+   for Source_Dirs use (".", "../core", "../support");
+   for Main use ("makecard");
+
+   package Compiler renames Common.Compiler;
+
+   package Builder renames Common.Builder;
+
+end Makecard;
+

@@ -1,0 +1,41 @@
+-- UserEntry13 test
+--
+print UserEntry13 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Add card p07 to SPRE database.
+hold
+
+print 2. Start TIS application if it is not running.
+hold
+
+displayOn
+tokenReader.insertCard('EXTREAD', 'p07')
+
+print 3. Wait for "INSERT FINGER" request.
+hold
+
+bioDevice.supplyImage( {'imageTemplate': 'User07fp', 'FAR':'0','FRR':0})
+print 4. Check for "TOKEN UPDATE FAILED" display message.
+print 5. Wait for "REMOVE TOKEN AND ENTER" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 6. Card removed
+pause 5
+
+door.open()
+
+print 7. Door opened
+pause 5
+door.close()
+print 8. Door closed
+
+pause 10
+
+print Test Complete.
+

@@ -12,12 +12,15 @@ inherit
 
 	USER
 
+create
+	make
+
 feature
 
---	issue_certificate: CERTIFICATE
---		do
+		--	issue_certificate: CERTIFICATE
+		--		do
 
---			create {PRIVILEDGE_CERTIFICATE} Result.make (Current, begining, ending: TIME)
---		end
+		--			create {PRIVILEDGE_CERTIFICATE} Result.make (Current, begining, ending: TIME)
+		--		end
 
 end

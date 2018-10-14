@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TOKEN_READER}."
+	description: "{TOKEN_READER}."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
-	page: "16"
+	page: "18"
 	Section: "2.7.2"
 	Z_schema: "TISMonitoredRealWorld"
 
@@ -19,6 +19,9 @@ inherit
 		redefine
 			current_token
 		end
+
+create
+	make
 
 feature
 

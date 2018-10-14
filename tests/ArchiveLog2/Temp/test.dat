@@ -1,0 +1,27 @@
+-- ArchiveLog2 test
+--
+print ArchiveLog2 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. copy archive.log onto floppy and leave in drive.
+hold
+
+print 2. Start TIS application if necessary and 
+print    ensure Audit Manager is logged on.
+
+hold
+
+print 3. Type "archive" at console.
+hold
+
+print 4. Check for screen message "PERFORMING OPERATION PLEASE WAIT".
+hold
+
+print 5. Check for screen message "ARCHIVE FAILED: PLEASE ENTER NEW OPERATION".
+print 6. Check audit alarm still failed.
+hold
+
+print Test Complete.

@@ -1,0 +1,27 @@
+-- Shutdown2 test
+--
+print Shutdown2 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+
+hold
+print 2. Admin token inserted.
+tokenReader.insertCard('INTREAD', 'p01')
+
+print 3. Wait for screen message "ENTER REQUIRED OPERATION".
+hold
+
+print 4. Type "shutdown" at admin console.
+hold
+
+print 5. Check for system shutdown.
+hold
+
+print Test Complete.
+
+

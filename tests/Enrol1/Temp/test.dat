@@ -1,0 +1,31 @@
+-- Enrol1 Test
+--
+print Enrol1 Test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('INTREAD', {'cState': 'absent', 'cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Generate enrolment data from enrolsource.dat and
+print    copy file Temp/enrol.dat to floppy and remove floppy from drive.
+hold
+print 2. Start TIS application.
+hold
+
+print 3. Check for screen message "PLEASE INSERT ENROLMENT DATA FLOPPY".
+print 4. Insert floppy.
+hold
+
+print 5. Check for screen message "VALIDATING ENROLMENT DATA PLEASE WAIT".
+print 6. Check for screen message "INVALID ENROLMENT DATA".
+print 7. Remove floppy.
+hold
+
+print 8. Check for screen message "PLEASE INSERT ENROLMENT DATA FLOPPY".
+hold
+
+print 9. Close down TIS application by closing the console.
+hold
+
+print Test Complete.

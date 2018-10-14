@@ -1,8 +1,10 @@
 note
-	description: "Summary description for {STATUSES}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "{STATUSES} describes purly internal records of the progress through user entry."
+	author: "Mansur Khazeev"
+	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
+	page: "24"
+	Z_schema: "Audit"
+	Section: "3.7"
 
 class
 	STATUSES

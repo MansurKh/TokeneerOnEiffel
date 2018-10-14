@@ -18,18 +18,20 @@ create
 
 feature {NONE} -- Initialization
 
-	make (issuer: ISSUER; begining, ending: DATE_TIME)
+	make (issuer: USER; time_period: TIME_PERIOD)
+		require
+			issuer.is_issuer
 		do
 			create id.make (1, issuer)
-			create validity_period.make (begining, ending)
-			create subject
-			create subjectPubKey
+			validity_period := time_period
+			subject := issuer -- TODO: change to a newly created user
+			create subject_pub_key
 		end
 
 feature -- Access
 
 	subject: USER
 
-	subjectPubKey: KEYPART
+	subject_pub_key: KEYPART
 
 end

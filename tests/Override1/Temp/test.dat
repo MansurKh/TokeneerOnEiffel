@@ -1,0 +1,45 @@
+-- Override1 test
+--
+print Override1 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('INTREAD', {'cState': 'absent', 'cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+hold
+
+print 2. Check for screen message "WELCOME TO TIS".
+tokenReader.insertCard('INTREAD', 'p02')
+
+print 3. Check for screen message "ENTER REQUIRED OPERATION".
+
+print 4. Type "update" at admin console.
+hold
+
+print 5. Check for screen message "INVALID REQUEST- PLEASE ENTER NEW OPERATION".
+print 6. Type "garbage" at admin console.
+hold
+
+print 7. Check for screen message "INVALID REQUEST- PLEASE ENTER NEW OPERATION".
+print 8. Type "override" at admin console.
+hold
+
+print 9. Check for screen message "PERFORMING OPERATION PLEASE WAIT".
+
+displayOn
+
+print 10. Check for screen message "ENTER REQUIRED OPERATION".
+print 11. Check for display message "ENTER ENCLAVE".
+hold
+
+door.open()
+pause 10
+door.close()
+print 12. Then check for display message "WELCOME TO TIS".
+hold
+ 
+
+print Test Complete.
+

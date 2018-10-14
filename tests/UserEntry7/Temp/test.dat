@@ -1,0 +1,30 @@
+-- UserEntry7 test
+--
+print UserEntry7 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 2. Card inserted
+tokenReader.insertCard('EXTREAD', 'p05')
+print 3. Wait for "INSERT FINGER" request.
+hold
+
+bioDevice.supplyImage( {'imageTemplate': 'User02fp', 'FAR':'0','FRR':0})
+
+print 4. Wait for "ENTRY DENIED / REMOVE TOKEN" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 5. Card removed
+print 6. Check for display message "WELCOME TO TIS / ENTER TOKEN".
+
+pause 10
+
+print Test Complete.

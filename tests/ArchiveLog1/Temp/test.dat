@@ -1,0 +1,39 @@
+-- ArchiveLog1 test
+--
+print ArchiveLog1 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Ensure a blank floppy is available but not in the floppy drive.
+hold
+
+print 2. Replace TIS Log directory by ArchiveLog1/Temp/Log.
+hold
+
+print 3. Start TIS application.
+hold
+print 4. Admin token inserted.
+tokenReader.insertCard('INTREAD', 'p06')
+
+print 5. Check for screen message "ENTER REQUIRED OPERATION".
+hold
+
+print 6. Type "archive" at console.
+hold
+
+print 7. Check for screen message "ENTER BLANK FLOPPY".
+print 8. Insert Floppy.
+hold
+
+print 9. Check for screen message "PERFORMING OPERATION PLEASE WAIT".
+print 10. Remove Floppy.
+hold
+
+print 11. Check for screen message "ARCHIVE FAILED: PLEASE ENTER NEW OPERATION".
+print 12. Check audit alarm still failed.
+hold
+
+print Test Complete.

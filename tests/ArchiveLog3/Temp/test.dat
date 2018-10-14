@@ -1,0 +1,33 @@
+-- ArchiveLog3 test
+--
+print ArchiveLog3 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Ensure a blank floppy is in the floppy drive.
+hold
+
+print 2. Start TIS application if necessary and 
+print    ensure Audit Manager is logged on.
+hold
+
+print 5. Type "archive" at console.
+hold
+
+print 8. Check for screen message "PERFORMING OPERATION PLEASE WAIT".
+hold
+
+print 9. Check for screen message "ENTER REQUIRED OPERATION".
+hold
+
+print 10. Remove Floppy.
+print 11. Check audit alarm now OK.
+hold
+
+tokenReader.removeCard('INTREAD')
+print 12. Check for screen message "WELCOME TO TIS".
+hold
+
+print Test Complete.

@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {PRIVILEGE}."
+	description: "{PRIVILEGE} describes possible roles held by the Token user."
 	author: "Mansur Khazeev"
 	EIS: "protocol=URI", "src=https://github.com/MansurKh/TokeneerOnEiffel/blob/master/specification/SpecZ.pdf"
 	page: "9"

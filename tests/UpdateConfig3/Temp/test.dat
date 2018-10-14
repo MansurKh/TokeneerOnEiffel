@@ -1,0 +1,39 @@
+-- Config3 test
+--
+print Config3 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Start TIS application if it is not running
+print    Log-on Security Officer (run test Config2) if not logged on.
+hold
+
+print 2. Transfer "newconfig.dat" to blank floppy and leave floppy in drive.
+hold
+
+print 3. Type "update config" at admin console.
+hold
+
+print 4. Check for screen message "PERFORMING OPERATION PLEASE WAIT".
+print 5. Check for screen message "ENTER REQUIRED OPERATION".
+print 6. Remove floppy.
+hold
+print 7. Check new config data on screen to ensure update occurred.
+hold
+
+print 8. Security Officer logs out.
+tokenReader.removeCard('INTREAD')
+print 9. Check config data and stats removed from screen
+hold
+
+print Test Complete.
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+-- AdminLogin2 test
+--
+print AdminLogin2 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Add card p06 to SPRE database.
+hold
+
+print 2. Start TIS application if it is not running.
+hold
+
+displayOn
+
+print 3. Admin Card inserted
+tokenReader.insertCard('INTREAD', 'p06')
+
+print 4. Check for screen message "REMOVE TOKEN".
+hold
+
+print 5. Admin Card removed
+tokenReader.insertCard('INTREAD', 'p06')
+
+print 6. Check for screen message "WELCOME TO TIS".
+hold
+
+print Test Complete.
+
+
+
+

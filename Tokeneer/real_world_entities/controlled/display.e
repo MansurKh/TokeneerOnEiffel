@@ -8,33 +8,48 @@ note
 
 class
 	DISPLAY
+
+inherit
+
+	LOGGED
+
 create
 	make
 
 feature
 
-	make (types: TYPES)
+	make (types: TYPES; logger_: LOGGER)
 		do
 			messages := types.display_messages
-			message := messages.blank
+			set_up_logger (logger_)
+			display (messages.blank)
 		ensure
-			message = messages.blank
+			state = messages.blank
 		end
 
 feature
 
 	display (msg: INTEGER)
+		-- Set the state of the display to `msg' and output corresponding message
 		require
 			messages.possible_values.has (msg)
+		local
+			message: STRING
 		do
-			message := msg
+			if state /= msg then
+				state := msg
+				if attached messages.get_display_messages (state) as message_tuple then
+					message := "Display message was set to: on top '" + message_tuple.top + "' on buttom '" + message_tuple.bottom +"'"
+					logger.add_log (message)
+				end
+			end
 		ensure
-			message = msg
+			state = msg
 		end
 
 feature -- State
 
-	message: INTEGER assign display
+	state: INTEGER assign display
 
 	messages: DISPLAY_MESSAGES
 

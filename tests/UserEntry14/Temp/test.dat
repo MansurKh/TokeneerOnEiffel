@@ -1,0 +1,48 @@
+-- UserEntry14 test
+--
+print UserEntry14 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+tokenReader.setState('INTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'INTREAD'}) 
+
+print 1. Copy "newconfig.dat" to floppy and leave in drive.
+
+print 2. Start TIS application if it is not running.
+hold
+
+tokenReader.insertCard('INTREAD', 'p01')
+print 3. Secrity officer logs on.
+
+print 4. Wait for "ENTER REQUIRED OPERATION" screen message.
+print 5. Then type "update" at console.
+hold
+
+print 6. Wait for configuration data to change. 
+hold
+
+displayOn
+tokenReader.insertCard('EXTREAD', 'p07')
+print 7. User enters card.
+
+print 8. Wait for "INSERT FINGER" request.
+hold
+
+bioDevice.supplyImage( {'imageTemplate': 'User07fp', 'FAR':'0','FRR':0})
+print 9. Check for "TOKEN UPDATE FAILED" display message.
+print 10. Wait for "ENTRY DENIED" message.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 11. User card removed
+
+pause 5
+
+tokenReader.removeCard('INTREAD')
+print 12. admin card removed.
+
+pause 5
+
+print Test Complete.
+

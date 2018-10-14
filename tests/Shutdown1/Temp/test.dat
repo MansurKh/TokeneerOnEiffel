@@ -1,0 +1,49 @@
+-- Shutdown1 test
+--
+print Shutdown1 test
+
+door.setState({'closed?': 'TRUE', 'locked?': 'TRUE', 'operational?': 'TRUE'})
+bioDevice.setState({'operational?': 'TRUE', 'noImage?': 'TRUE', 'image':{'imageTemplate':'','FAR':'0', 'FRR':'0'} }) 
+tokenReader.setState('EXTREAD', {'cState': 'absent','cardHandle':'','rState': 'empty', 'name': 'EXTREAD'}) 
+
+print 1. Start TIS application if it is not running.
+         Ensure Security Officer present by running test Config5.
+hold
+print 2. User token inserted.
+tokenReader.insertCard('EXTREAD', 'p06')
+
+displayOn
+
+print 3. Wait for "REMOVE TOKEN AND ENTER" request.
+hold
+
+tokenReader.removeCard('EXTREAD')
+print 4. User card removed.
+
+pause 5
+print 5. Check for display message "ENTER ENCLAVE".
+door.open()
+
+pause 5
+print 6. Door is now open.
+
+print 7. Type "shutdown" at admin console.
+hold
+
+print 8. wait for "CLOSE ENCLAVE DOOR" request.
+print    Next step will cause admin token to be removed and door to close,
+print    Check that system does not shutdown until door is closed.
+hold
+
+tokenReader.removeCard('INTREAD')
+
+pause 5
+door.close()
+print 9. Door is now closed.
+
+print 10. Check for system shutdown.
+hold
+
+print Test Complete.
+
+
