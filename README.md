@@ -1,2 +1,2 @@
 # TokeneerOnEiffel
-Implementations of Tokeneer rpoject using Eiffel language
+Implementations of Tokeneer project using Eiffel language
